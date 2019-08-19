@@ -16,15 +16,15 @@ class FastSmooth {
      * @param edgeCase  how to handle edges (see enum decl)
      * @return smoothed input array
      */
-    static double[] fastSmooth(double[] input, WidthGenerator<Integer> generator, EdgeCase edgeCase) {
-        Iterator<Integer> iter = generator.iterator();
+    static double[] fastSmooth(double[] input, WidthGenerator generator, EdgeCase edgeCase) {
+        Iterator iter = generator.iterator();
         if (!iter.hasNext()) return input; // none to do
 
-        int currWidth = iter.next();
+        int currWidth = (int) iter.next();
         double[] arr = Arrays.copyOf(input, input.length);
         while (iter.hasNext()) {
             arr = impl(input, currWidth, edgeCase);
-            currWidth = iter.next();
+            currWidth = (int) iter.next();
         }
 
         return arr;

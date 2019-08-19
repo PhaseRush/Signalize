@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import static com.github.phaserush.Util.round;
 
-public class WidthGenerator<T extends Integer> implements Iterable<T> {
+public class WidthGenerator implements Iterable {
     private int startWidth, endWidth;
     private double stepSize;
     private StepMethod method;
@@ -17,11 +17,11 @@ public class WidthGenerator<T extends Integer> implements Iterable<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
-        return new Generator<>();
+    public Iterator iterator() {
+        return new Generator();
     }
 
-    private class Generator<K extends Integer> implements Iterator<K> {
+    private class Generator implements Iterator {
 
         @Override
         public boolean hasNext() {
@@ -29,14 +29,14 @@ public class WidthGenerator<T extends Integer> implements Iterable<T> {
         }
 
         @Override
-        public K next() {
+        public Integer next() {
             switch (method) {
                 case ADD:
                     startWidth += stepSize;
                 case MULTIPLY:
                     startWidth *= stepSize;
             }
-            return (K) new Integer(round(startWidth));
+            return round(startWidth);
         }
     }
 
